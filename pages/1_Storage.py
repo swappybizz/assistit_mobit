@@ -2,7 +2,7 @@ import streamlit as st
 from pymongo import MongoClient
 import base64
 from st_paywall import add_auth
-
+import datetime
 import speech_recognition as sr
 
 from openai import OpenAI
@@ -17,6 +17,30 @@ if 'form_filled_zip' not in st.session_state:
 
 # Add authentication
 add_auth(required=True)
+
+def save_picture_to_mongodb(picture, email):
+    # Read image file buffer as a PIL Image
+    img = Image.open(picture)
+    # Convert PIL Image to bytes
+    img_byte_arr = io.BytesIO()
+    img.save(img_byte_arr, format='PNG')
+    img_byte_arr = img_byte_arr.getvalue()
+    # Encode the picture bytes to base64
+    encoded_picture = base64.b64encode(img_byte_arr).decode('utf-8')
+    # Get current datetime
+    current_datetime = datetime.datetime.utcnow()
+    # Save to MongoDB with email and datetime
+    collection.insert_one({
+        "picture_data": encoded_picture,
+        "email": email,
+        "status": "born",
+        "type": "picture",
+        "session_id": st.session_state.session_id,
+        "datetime": current_datetime
+    })
+    st.toast("Picture saved, It's available at the Storage")
+
+
 
 def transcribe_audio(record):
     audio_data = base64.b64decode(record['audio_data'])
@@ -60,6 +84,13 @@ def delete_record(record_id):
 tab1, tab2 = st.tabs(["Process", "Storage"])
 
 with tab2:
+    with st.sidebar:
+        "upload files"
+        upload_images = st.file_uploader("Choose files", type=['png', 'jpg', 'jpeg'], accept_multiple_files=True)
+        if upload_images:
+            # save to database
+            for image in upload_images:
+                save_picture_to_mongodb(image, st.session_state.email)
 
 
     # Sidebar with subscription status and user email
@@ -89,7 +120,8 @@ with tab2:
             if st.button("Delete", key=f"delete_picture_{record['_id']}"):
                 delete_record(record['_id'])
                 st.rerun()
-    "insert Entry"
+    
+
 
 with tab1:
     with st.form(key="form"):

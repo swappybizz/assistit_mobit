@@ -44,7 +44,7 @@ def save_audio_to_mongodb(audio_bytes, email):
         "session_id": st.session_state.session_id,
         "datetime": current_datetime
     })
-    st.toast("Audio saved to MongoDB")
+    st.toast("Audio saved, It's available at the Storage")
 
 def callback():
     if st.session_state.my_recorder_output:
@@ -72,6 +72,7 @@ def save_picture_to_mongodb(picture, email):
         "session_id": st.session_state.session_id,
         "datetime": current_datetime
     })
+    st.toast("Picture saved, It's available at the Storage")
 
 
 img_file_buffer = st.camera_input("Take a picture", key="camera_input",label_visibility='hidden')
