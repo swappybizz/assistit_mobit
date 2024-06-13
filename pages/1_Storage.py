@@ -85,8 +85,7 @@ tab1, tab2 = st.tabs(["Process", "Storage"])
 
 with tab2:
     with st.sidebar:
-        "upload files"
-        upload_images = st.file_uploader("Choose files", type=['png', 'jpg', 'jpeg'], accept_multiple_files=True)
+        upload_images = st.file_uploader("Upload files", type=['png', 'jpg', 'jpeg'], accept_multiple_files=True)
         if upload_images:
             # save to database
             for image in upload_images:
