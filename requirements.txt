@@ -3,3 +3,4 @@ streamlit_mic_recorder
 st-paywall
 pymongo
 speechrecognition
+pillow
