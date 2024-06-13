@@ -8,6 +8,56 @@ from PIL import Image
 import io
 import uuid
 
+# set to wide
+st.set_page_config(layout="wide", page_title="Kapture", page_icon="📷",initial_sidebar_state="collapsed")
+html_code = """
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+.logo-container {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    background-color: transparent;
+}
+
+.logo-text {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 32px;
+    color: black;
+    text-shadow: 0 0 10px #ff0265, 0 0 20px #ff0265, 0 0 30px #ff0265, 0 0 40px #000000, 0 0 50px #000000;
+    animation: glow 10s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 10px #ff0265, 0 0 20px #ff0265, 0 0 30px #ff0265, 0 0 40px #000000, 0 0 50px #000000;
+    }
+    25% {
+        text-shadow: 0 0 10px #000000, 0 0 20px #ff0265, 0 0 30px #000000, 0 0 40px #ff0265, 0 0 50px #ff0265;
+    }
+    50% {
+        text-shadow: 0 0 10px #ff0265, 0 0 20px #000000, 0 0 30px #ff0265, 0 0 40px #ff0265, 0 0 50px #000000;
+    }
+    75% {
+        text-shadow: 0 0 10px #000000, 0 0 20px #ff0265, 0 0 30px #000000, 0 0 40px #ff0265, 0 0 50px #ff0265;
+    }
+    100% {
+        text-shadow: 0 0 10px #ff0265, 0 0 20px #ff0265, 0 0 30px #ff0265, 0 0 40px #000000, 0 0 50px #000000;
+    }
+}
+</style>
+<div class="logo-container">
+    <div class="logo-text">clerky</div>
+</div>
+"""
+
+
+with st.sidebar:
+    st.markdown(html_code, unsafe_allow_html=True)
+    "by Assistit"
+    st.divider()
+
 if 'session_id' not in st.session_state:
     st.session_state.session_id = f"ST_ASSTT_{str(uuid.uuid4())}"
 

@@ -10,10 +10,55 @@ from PIL import Image
 import io, os
 
 
-st.set_page_config(layout="wide")
-# add state for zip file
-if 'form_filled_zip' not in st.session_state:
-    st.session_state.form_filled_zip = None
+st.set_page_config(layout="wide", page_title="Store", page_icon="📷",initial_sidebar_state="expanded")
+
+html_code = """
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+.logo-container {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    background-color: transparent;
+}
+
+.logo-text {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 32px;
+    color: black;
+    text-shadow: 0 0 10px #ff0265, 0 0 20px #ff0265, 0 0 30px #ff0265, 0 0 40px #000000, 0 0 50px #000000;
+    animation: glow 10s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 10px #ff0265, 0 0 20px #ff0265, 0 0 30px #ff0265, 0 0 40px #000000, 0 0 50px #000000;
+    }
+    25% {
+        text-shadow: 0 0 10px #000000, 0 0 20px #ff0265, 0 0 30px #000000, 0 0 40px #ff0265, 0 0 50px #ff0265;
+    }
+    50% {
+        text-shadow: 0 0 10px #ff0265, 0 0 20px #000000, 0 0 30px #ff0265, 0 0 40px #ff0265, 0 0 50px #000000;
+    }
+    75% {
+        text-shadow: 0 0 10px #000000, 0 0 20px #ff0265, 0 0 30px #000000, 0 0 40px #ff0265, 0 0 50px #ff0265;
+    }
+    100% {
+        text-shadow: 0 0 10px #ff0265, 0 0 20px #ff0265, 0 0 30px #ff0265, 0 0 40px #000000, 0 0 50px #000000;
+    }
+}
+</style>
+<div class="logo-container">
+    <div class="logo-text">clerky</div>
+</div>
+"""
+
+with st.sidebar:
+    st.markdown(html_code, unsafe_allow_html=True)
+    "by Assistit"
+    st.divider()
+
 
 # Add authentication
 add_auth(required=True)
@@ -127,9 +172,7 @@ with tab1:
         col1, col2 = st.columns([1, 1])
         with col1:
             uploaded_files = st.file_uploader("Choose a file", type=['png', 'jpg', 'jpeg'], accept_multiple_files=True)
-            save = st.checkbox("Save")
-            selected_schema = st.multiselect("Select from previous schemas", ["Schema 1", "Schema 2"])
-            selected_agent = st.selectbox("Select Agent", ["Agent 1", "Agent 2"])
+            selected_agent = st.selectbox("Select Agent", ["Clerky"],disabled=True)
         
         with col2:
             audio_records = get_audio_from_mongodb(st.session_state.get('email', 'test@example.com'))
