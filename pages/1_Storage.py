@@ -24,7 +24,6 @@ def transcribe_audio(record):
 
     with sr.AudioFile(io.BytesIO(audio_data)) as source:
         audio = recognizer.record(source)
-    
     try:
         transcription = recognizer.recognize_google(audio)
     except sr.UnknownValueError:

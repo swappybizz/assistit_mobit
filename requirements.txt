@@ -4,3 +4,4 @@ st-paywall
 pymongo
 speechrecognition
 pillow
+openai
