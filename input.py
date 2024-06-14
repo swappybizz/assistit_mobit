@@ -125,10 +125,10 @@ def save_picture_to_mongodb(picture, email):
     })
     st.toast("Picture saved, It's available at the Storage")
 
-with st.expander("Camera", expanded=False):
-    img_file_buffer = st.camera_input("Take a picture", key="camera_input",label_visibility='hidden')
-    if img_file_buffer:
-        save_picture_to_mongodb(img_file_buffer, st.session_state.email)
+
+img_file_buffer = st.camera_input("Take a picture", key="camera_input",label_visibility='hidden')
+if img_file_buffer:
+    save_picture_to_mongodb(img_file_buffer, st.session_state.email)
 
 with st.container():
     audio = mic_recorder(
