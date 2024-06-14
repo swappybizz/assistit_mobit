@@ -48,6 +48,8 @@ html_code = """
         text-shadow: 0 0 10px #ff0265, 0 0 20px #ff0265, 0 0 30px #ff0265, 0 0 40px #000000, 0 0 50px #000000;
     }
 }
+
+
 </style>
 <div class="logo-container">
     <div class="logo-text">clerky</div>
@@ -58,6 +60,8 @@ with st.sidebar:
     st.markdown(html_code, unsafe_allow_html=True)
     "by Assistit"
     st.divider()
+    
+
 
 
 # Add authentication
