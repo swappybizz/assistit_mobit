@@ -9,7 +9,7 @@ import io
 import uuid
 
 # set to wide
-st.set_page_config(layout="wide", page_title="Kapture", page_icon="📷",initial_sidebar_state="collapsed")
+st.set_page_config(layout="wide", page_title="Kapture", page_icon="📷",initial_sidebar_state="auto",)
 html_code = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
