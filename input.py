@@ -63,7 +63,7 @@ if 'session_id' not in st.session_state:
     st.session_state.session_id = f"ST_ASSTT_{str(uuid.uuid4())}"
 
 # Add authentication
-add_auth(required=True)
+add_auth(required=False)
 
 # Sidebar with subscription status and user email
 with st.sidebar:
