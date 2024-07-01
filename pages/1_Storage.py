@@ -65,7 +65,7 @@ with st.sidebar:
 
 
 # Add authentication
-add_auth(required=True)
+add_auth(required=False)
 
 def save_picture_to_mongodb(picture, email):
     # Read image file buffer as a PIL Image
